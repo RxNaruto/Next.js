@@ -4,3 +4,9 @@ export function GET(){
         name: "admin"
     })
 }
+export function POST(){
+    return Response.json({
+        email: "admin@mail.com",
+        name: "admin"
+    })
+}

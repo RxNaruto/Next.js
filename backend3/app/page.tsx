@@ -5,6 +5,11 @@ async function getUserDetail(){
   return response.data;
 }
 
+export function getUserDetail2(){
+  const response = await axios.get("#");
+  
+}
+
 export default async function Home(){
   const userdata=await getUserDetail();
 

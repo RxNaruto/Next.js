@@ -1,6 +1,9 @@
+
+import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export function GET(){
+const client = new PrismaClient
+export function GET(req: NextRequest){
     return NextResponse.json({
         email: "goku@mail.com",
         name: "goku"
@@ -9,10 +12,24 @@ export function GET(){
 
 export async function POST(req: NextRequest){
     const body = await req.json();
-    console.log(body);
-    console.log(req.headers.get("authorization"));
-    console.log(req.nextUrl.searchParams.get("id"));
-    return NextResponse.json({
-        message: "You are signed in"
-    })
+    try {
+        await client.user.create({
+            data:{
+                email: body.email,
+                password: body.password
+            }
+        })
+       
+        return NextResponse.json({
+            body
+        })
+    } catch (e) {
+        console.log(e);
+        return NextResponse.json({
+            message: "Error while signing up"
+        },{
+            status: 411
+        })
+        
+    }
 }

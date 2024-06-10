@@ -1,10 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation"
+import { signIn,signOut } from "next-auth/react";
 export function Appbar(){
     const router=useRouter();
     return <div>
     <button onClick={()=>{
-        router.push("/api/auth/signin")
+        signIn();
     }} >Signin</button>
+
+<button onClick={()=>{
+        signout();
+    }} >LogOut</button>
     </div>
 }
